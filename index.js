@@ -1,18 +1,13 @@
-//const express = require('express');
 import express from 'express';
-//const cors = require('cors');
 import cors from 'cors';
-//const morgan = require('morgan');
 import morgan from 'morgan';
-//const bodyParser = require('body-parser');
 import bodyParser from 'body-parser';
-//const tokenDeploy = require('./sui/tokenDeploy.js');
 import {deployNewToken} from './sui/tokenDeploy.js';
 import {getComments, storeComment} from './accessors/db.js';
 import {uploadImage} from './accessors/s3.js';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 
 // Middleware
@@ -45,8 +40,8 @@ app.post('/newCoin', (req, res) => {
       version: '35489213',
       digest: '854cAi1LUtXye2h7TrrRnjQtDUmrzSTfYXa8nAHcbtJg'
     }] };
-    res.status(200).json(ret);
-    /*uploadImage(imageBase64).then(({ Location, Key }) => {
+    //res.status(200).json(ret);
+    uploadImage(imageBase64).then(({ Location, Key }) => {
       console.log(Location, Key);
       deployNewToken(150_000_000 * 1_000_000_000, name, ticker, description, Location).then(({ objectChanges, balanceChanges }) => {
         console.log(`${ticker} created`);
@@ -58,7 +53,7 @@ app.post('/newCoin', (req, res) => {
     }).catch((err) => {
       console.log(err);
       res.status(504).json({status: 504});;
-    });*/
+    });
 })
 
 app.get('/comments/:poolId', (req, res) => {
