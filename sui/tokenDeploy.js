@@ -58,7 +58,7 @@ export const deployNewToken = async (maxSupply, name, ticker, description, image
     mkdirSync("../" + folderName + "/sources");
     const moveCode = getMoveCode(maxSupply, name, ticker, description, imageUrl);
     const tomlCode = getToml();
-    writeFileSync("../" + folderName + "/move.toml", tomlCode);
+    writeFileSync("../" + folderName + "/Move.toml", tomlCode);
     writeFileSync("../" + folderName + "/sources/fungiblecoin.move" , moveCode);
     const path_to_contracts = path.join(dirname(fileURLToPath(import.meta.url)), `../../${folderName}`)
     
